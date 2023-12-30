@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "generators.h"
 #include "md5.h"  
 #include "sha1.h"
 #include "sha256.h"
@@ -12,35 +13,6 @@
 #include <random>
 #include <vector>
 #include <iomanip>
-
-
-std::string customHash(std::string hashInput) {
-
-    // salt'as
-    const std::string salt = "nKd_n3aTsP3siT";
-    hashInput += salt;
-
-    const unsigned long long prime1 = 709607;
-    const unsigned long long prime2 = 295099;
-    unsigned long long hash = prime1;
-
-    for (char c : hashInput) {
-        hash ^= (hash << 5) + (hash >> 2) + static_cast<unsigned int>(c);
-    }
-
-    hash += prime2 * hashInput.length();
-
-    std::string hashOutput;
-    const std::string hex = "0123456789abcdef";
-
-    // hash generavimas (64 chars)
-    for (int i = 0; i < 64; i++) {
-        hash = (hash * prime1) ^ (hash >> 3);
-        hashOutput += hex[hash % 16];
-    }
-
-    return hashOutput;
-}
 
 
 void hashFromInput() {
@@ -107,11 +79,21 @@ void hashFromFile() {
 int chooseHashingAlgorithm() {
     int choice;
     std::cout << "Choose the hashing algorithm:\n";
-    std::cout << "1. Custom Hashing Algorithm\n";
+    std::cout << "1. My hashing algorithm\n";
     std::cout << "2. MD5\n";
     std::cout << "3. SHA1\n";
     std::cout << "4. SHA256\n";
-    std::cout << "Enter your choice (1-4): ";
+    std::cout << "5. `metroff` hash gen\n";
+    std::cout << "6. `miautawn` hash gen\n";
+    std::cout << "7. `vabasou` hash gen\n";
+    std::cout << "8. `vadimasKo` hash gen\n";
+    std::cout << "9. `naciukasM` hash gen\n";
+    std::cout << "10. `pauliusU` hash gen\n";
+    std::cout << "11. `linccer` hash gen\n";    
+    std::cout << "12. `theFeish` hash gen\n";     
+    std::cout << "13. `klaidasK` hash gen\n";       
+    std::cout << "14. `jFour404` hash gen\n";  
+    std::cout << "Enter your choice: ";
     std::cin >> choice;
     return choice;
 }
@@ -119,10 +101,20 @@ int chooseHashingAlgorithm() {
 
 std::string performHashing(const std::string& input, int algorithmChoice) {
     switch (algorithmChoice) {
-        case 1: return customHash(input);
+        case 1: return myHashGen(input);
         case 2: return md5(input);
         case 3: return sha1(input);
         case 4: return sha256(input);
+        case 5: return metroffHashGen(input);
+        case 6: return miautawnHashGen(input);
+        case 7: return vabasouHashGen(input);
+        case 8: return vadimasKoHashGen(input);
+        case 9: return maciukasMHashGen(input);
+        case 10: return pauliusUHashGen(input);
+        case 11: return linccerHashGen(input);
+        case 12: return theFeishHashGen(input);
+        case 13: return klaidasKHashGen(input);
+        case 14: return jFour404HashGen(input);
         default: return "Invalid choice";
     }
 }
@@ -155,7 +147,7 @@ void konstitucijaTest() {
     file.close();
 
     int algorithmChoice = chooseHashingAlgorithm();
-    int numRuns = 5000; 
+    int numRuns = 10; 
     std::chrono::duration<double, std::milli> totalElapsed(0);
 
     for (int i = 0; i < numRuns; ++i) {

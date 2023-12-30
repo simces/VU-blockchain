@@ -45,6 +45,9 @@
         "ctime": "cpp",
         "iomanip": "cpp",
         "chrono": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "map": "cpp"
     }
 }

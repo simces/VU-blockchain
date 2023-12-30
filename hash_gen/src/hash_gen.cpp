@@ -1,5 +1,6 @@
 #include <iostream>
 #include "functions.h"
+#include "generators.h"
 
 int main() {
     std::cout << "Choose an option:\n";
@@ -29,7 +30,7 @@ int main() {
             break;
         }
         case 5: {
-            // generateAvalancheFile();
+            generateAvalancheFile();
             int algorithmChoice = chooseHashingAlgorithm();
             avalancheTest(algorithmChoice);
             break;

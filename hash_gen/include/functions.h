@@ -3,8 +3,6 @@
 
 #include <string>
 
-std::string customHash(std::string hashInput);
-
 void hashFromInput();
 
 void hashFromFile();
