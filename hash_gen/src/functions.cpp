@@ -11,7 +11,7 @@
 #include <limits>
 #include <random>
 #include <vector>
-
+#include <iomanip>
 
 
 std::string customHash(std::string hashInput) {
@@ -220,5 +220,120 @@ void collisionTest(int algorithmChoice) {
     }
 
     std::cout << collisions << " collisions found out of " << totalPairs << " pairs.\n";
+    inFile.close();
+}
+
+
+void generateAvalancheFile() {
+    std::ofstream outFile("hash_gen/generatedFiles/avalanche.txt");
+    if (!outFile.is_open()) {
+        std::cerr << "Unable to open file for writing.\n";
+        return;
+    }
+
+    const std::vector<int> lengths = {10, 100, 500, 1000};
+    const int pairsEach = 25000;
+    const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> dist(0, chars.size() - 1);
+    std::uniform_int_distribution<> posDist(0, chars.size() - 2);
+
+    for (int len : lengths) {
+        for (int i = 0; i < pairsEach; ++i) {
+            std::string str1, str2;
+            for (int j = 0; j < len; ++j) {
+                str1 += chars[dist(generator)];
+            }
+
+            str2 = str1;
+            int posToChange = rd() % len;
+            char newChar = chars[posDist(generator)];
+            while (newChar == str2[posToChange]) { 
+                newChar = chars[posDist(generator)];
+            }
+            str2[posToChange] = newChar;
+
+            outFile << str1 << "," << str2 << "\n";
+        }
+    }
+    outFile.close();
+}
+
+
+std::string transformToBinary(char hexChar) {
+    switch (hexChar) {
+        case '0': return "0000";
+        case '1': return "0001";
+        case '2': return "0010";
+        case '3': return "0011";
+        case '4': return "0100";
+        case '5': return "0101";
+        case '6': return "0110";
+        case '7': return "0111";
+        case '8': return "1000";
+        case '9': return "1001";
+        case 'a': case 'A': return "1010";
+        case 'b': case 'B': return "1011";
+        case 'c': case 'C': return "1100";
+        case 'd': case 'D': return "1101";
+        case 'e': case 'E': return "1110";
+        case 'f': case 'F': return "1111";
+        default: return "0000"; 
+    }
+}
+
+
+void avalancheTest(int algorithmChoice) {
+    std::ifstream inFile("hash_gen/generatedFiles/avalanche.txt");
+    if (!inFile.is_open()) {
+        std::cerr << "Unable to open file for reading.\n";
+        return;
+    }
+
+    double bitsMin = 256, bitsMax = 0, bitsAvg = 0;
+    double hexMin = 64, hexMax = 0, hexAvg = 0;
+    int totalPairs = 0;
+
+    std::string line, baseStr, variantStr;
+
+    while (std::getline(inFile, line)) {
+        std::size_t delimiterPos = line.find(',');
+        baseStr = line.substr(0, delimiterPos);
+        variantStr = line.substr(delimiterPos + 1);
+
+        std::string hashBase = performHashing(baseStr, algorithmChoice);
+        std::string hashVariant = performHashing(variantStr, algorithmChoice);
+
+        double diffHex = 0, diffBits = 0;
+        for (size_t i = 0; i < hashBase.length(); ++i) {
+            if (hashBase[i] != hashVariant[i]) diffHex++;
+            
+            std::string binaryBase = transformToBinary(hashBase[i]);
+            std::string binaryVariant = transformToBinary(hashVariant[i]);
+            for (size_t j = 0; j < binaryBase.size(); ++j) {
+                if (binaryBase[j] != binaryVariant[j]) diffBits++;
+            }
+        }
+
+        hexMin = std::min(hexMin, diffHex);
+        hexMax = std::max(hexMax, diffHex);
+        hexAvg += diffHex;
+
+        bitsMin = std::min(bitsMin, diffBits);
+        bitsMax = std::max(bitsMax, diffBits);
+        bitsAvg += diffBits;
+
+        totalPairs++;
+    }
+
+    hexAvg = hexAvg / 64 / totalPairs * 100;
+    bitsAvg = bitsAvg / 256 / totalPairs * 100;
+
+    std::cout << "                               Hex     Bits\n";
+    std::cout << "Minimum difference in pairs:   " << hexMin << "      " << bitsMin << "\n";
+    std::cout << "Maximum difference in pairs:   " << hexMax << "      " << bitsMax << "\n";
+    std::cout << "Average difference in pairs:   " << std::setprecision(3) << hexAvg << "%   " << std::setprecision(3) << bitsAvg << "%\n";
+
     inFile.close();
 }

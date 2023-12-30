@@ -19,4 +19,10 @@ void collisionTest(int algorithmChoice);
 
 void generateCollisionFile();
 
+void generateAvalancheFile();
+
+void avalancheTest(int algorithmChoice);
+
+std::string transformToBinary(char hexChar);
+
 #endif
