@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Collision & avalanche test generated files
+hash_gen/generatedFiles*

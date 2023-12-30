@@ -15,5 +15,8 @@ int chooseHashingAlgorithm();
 
 std::string performHashing(const std::string& input, int algorithmChoice);
 
-#endif
+void collisionTest(int algorithmChoice);
 
+void generateCollisionFile();
+
+#endif

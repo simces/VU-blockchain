@@ -1,13 +1,17 @@
 #include "functions.h"
+#include "md5.h"  
+#include "sha1.h"
+#include "sha256.h"
+
 #include <string>
 #include <cmath>
 #include <iostream>
 #include <fstream>
-#include "md5.h"  
-#include "sha1.h"
-#include "sha256.h"
 #include <chrono>
 #include <limits>
+#include <random>
+#include <vector>
+
 
 
 std::string customHash(std::string hashInput) {
@@ -163,4 +167,58 @@ void konstitucijaTest() {
 
     double averageTime = totalElapsed.count() / numRuns;
     std::cout << "Average time taken to hash: " << averageTime << " ms\n";
+}
+
+
+void generateCollisionFile() {
+    std::ofstream outFile("hash_gen/generatedFiles/collision.txt");
+    if (!outFile.is_open()) {
+        std::cerr << "Unable to open file for writing.\n";
+        return;
+    }
+
+    const std::vector<int> lengths = {10, 100, 500, 1000};
+    const int pairsEach = 250000;  
+    const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<> dist(0, chars.size() - 1);
+
+    for (int len : lengths) {
+        for (int i = 0; i < pairsEach; ++i) {
+            std::string str1, str2;
+            for (int j = 0; j < len; ++j) {
+                str1 += chars[dist(generator)];
+                str2 += chars[dist(generator)];
+            }
+            outFile << str1 << "," << str2 << "\n";
+        }
+    }
+    outFile.close();
+}
+
+
+void collisionTest(int algorithmChoice) {
+    std::ifstream inFile("hash_gen/generatedFiles/collision.txt");
+    if (!inFile.is_open()) {
+        std::cerr << "Unable to open file for reading.\n";
+        return;
+    }
+
+    std::string line, str1, str2;
+    int collisions = 0, totalPairs = 0;
+
+    while (std::getline(inFile, line)) {
+        std::size_t delimiterPos = line.find(',');
+        str1 = line.substr(0, delimiterPos);
+        str2 = line.substr(delimiterPos + 1);
+
+        if (performHashing(str1, algorithmChoice) == performHashing(str2, algorithmChoice)) {
+            collisions++;
+        }
+        totalPairs++;
+    }
+
+    std::cout << collisions << " collisions found out of " << totalPairs << " pairs.\n";
+    inFile.close();
 }
