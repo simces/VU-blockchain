@@ -3,7 +3,17 @@
 
 #include <string>
 
-std::string hashing(std::string hashInput);
+std::string customHash(std::string hashInput);
+
+void hashFromInput();
+
+void hashFromFile();
+
+void konstitucijaTest();
+
+int chooseHashingAlgorithm();
+
+std::string performHashing(const std::string& input, int algorithmChoice);
 
 #endif
 
