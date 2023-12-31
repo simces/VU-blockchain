@@ -105,7 +105,14 @@ And after averaging everything out, we can find the overall fastest algorithms. 
 
 ![image](https://github.com/simces/VU-blockchain/assets/78842398/7bf415af-af4b-4465-9c77-4f45e772a8a2)
 
-The next step – collision testing. To make it fair for all the different algorithms, they all used the same testing file, consisting of `100 000` different string pairs, of random lengths. 
+The next step – collision testing. To make it fair for all the different algorithms, they all used the same testing file, consisting of `100 000` different string pairs, of random lengths. Key points:
+
+* maciukasM hash function had `1` collision pair out of the `100 000` attempts (`9MtVTlyIHM` and `eMrXVWcvKR`);
+* linccer hash function had `157` collision pairs out of the `100 000` attempts;
+* couldn't check the `Paulius-U` and `JFour404` functions, due to extraordinarily long load times without any results (> 1 hour);
+
+There wasn't anything notable to add about the other hashing algorithms, since I couldn't manage to find a collision using them. 
+
 
 
 
