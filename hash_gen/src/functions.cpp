@@ -13,6 +13,7 @@
 #include <random>
 #include <vector>
 #include <iomanip>
+#include <tuple>
 
 
 void hashFromInput() {
@@ -170,7 +171,7 @@ void generateCollisionFile() {
     }
 
     const std::vector<int> lengths = {10, 100, 500, 1000};
-    const int pairsEach = 250000;  
+    const int pairsEach = 25000;  
     const std::string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     std::random_device rd;
     std::mt19937 generator(rd());
@@ -197,20 +198,29 @@ void collisionTest(int algorithmChoice) {
         return;
     }
 
-    std::string line, str1, str2;
+    std::string line, str1, str2, hashValue;
     int collisions = 0, totalPairs = 0;
+    std::vector<std::tuple<std::string, std::string, std::string>> collisionDetails;
 
     while (std::getline(inFile, line)) {
         std::size_t delimiterPos = line.find(',');
         str1 = line.substr(0, delimiterPos);
         str2 = line.substr(delimiterPos + 1);
 
-        if (performHashing(str1, algorithmChoice) == performHashing(str2, algorithmChoice)) {
+        hashValue = performHashing(str1, algorithmChoice);
+        if (hashValue == performHashing(str2, algorithmChoice)) {
             collisions++;
+            collisionDetails.emplace_back(str1, str2, hashValue);
         }
         totalPairs++;
     }
 
+
+    for (const auto& collision : collisionDetails) {
+        std::string collisionStr1, collisionStr2, collisionHash;
+        std::tie(collisionStr1, collisionStr2, collisionHash) = collision;
+        std::cout << "Collision pair: " << collisionStr1 << " and " << collisionStr2 << " produce the same hash: " << collisionHash << "\n";
+    }
     std::cout << collisions << " collisions found out of " << totalPairs << " pairs.\n";
     inFile.close();
 }

@@ -550,8 +550,8 @@ std::string theFeishHashGen(std::string s) {
 
 
 // -----------------------------------------------------------------------------------------------
-// https://github.com/TheFeish/Hash
-// https://github.com/TheFeish/Hash/blob/V0.1/Hash/hashFunc.cpp
+// https://github.com/KlaidasK/Blockchain
+// https://github.com/KlaidasK/Blockchain/blob/main/v0.1.cpp
 // -----------------------------------------------------------------------------------------------
 std::string klaidasKHashGen(const std::string& input) {
 

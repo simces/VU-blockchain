@@ -33,3 +33,4 @@
 
 # Collision & avalanche test generated files
 hash_gen/generatedFiles*
+hash_gen/hashComparisonFiles*

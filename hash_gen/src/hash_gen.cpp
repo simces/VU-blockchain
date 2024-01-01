@@ -24,7 +24,7 @@ int main() {
             konstitucijaTest();
             break;
         case 4: {
-            generateCollisionFile(); // it'll generate a file with 1 000 000 pairs, change number before building the file
+            generateCollisionFile();
             int algorithmChoice = chooseHashingAlgorithm();
             collisionTest(algorithmChoice);
             break;
