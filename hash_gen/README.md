@@ -11,21 +11,20 @@
 ---
 
 ### Overview of the algorithm
-**Appending salt to the input:** The function takes the input string and appends a predefined salt value to it. This salt is a constant string `"nKd_n3aTsP3siT"`. 
+**Appending salt to the input:** the function takes the input string and appends a predefined salt value to it. This salt is a constant string `"nKd_n3aTsP3siT"`. 
 
-**Initializing the hash value:** 
-The function initializes a hash value using a prime number, `prime1 = 709607`. 
+**Initializing the hash value:** the function initializes a hash value using a prime number, `prime1 = 709607`. 
 
 **Iterating over each char:** 
-For every character in the salted input, the function performs a series of bitwise operations:
+for every character in the salted input, the function performs a series of bitwise operations:
 - It first calculates the character's ASCII value and performs bitwise operations (`<<` left shift and `>>` right shift) on the hash value.
 - It then combines these shifted hash values with the ASCII value of the character.
 
 **Adding length-based value:** 
-After processing all characters, the function adds a value based on the length of the input (multiplied by `prime2 = 295099`) to the hash. This step ensures that strings of different lengths will produce different hashes.
+after processing all characters, the function adds a value based on the length of the input (multiplied by `prime2 = 295099`) to the hash. This step ensures that strings of different lengths will produce different hashes.
 
 **Generating hex hash output:** 
-Finally, the function generates a 64-character hexadecimal string as the hash output:
+finally, the function generates a 64-character hexadecimal string as the hash output:
 - It iteratively modifies the hash value using bitwise operations involving `prime1`.
 - For each iteration, it selects one hexadecimal digit (from the string `hex = "0123456789abcdef"`) based on the current hash value (using `hash % 16`) and appends it to the output string.
 - This process is repeated 64 times to generate a 64-character long hash.
@@ -42,7 +41,8 @@ Based on the image below we can see, that the custom hash algorithm holds up aga
 
 ![image](https://github.com/simces/vu-blockchain/assets/78842398/2d345e34-2cf4-412a-874c-c82dc3574073) 
 
-![image](https://github.com/simces/vu-blockchain/assets/78842398/a493c5f8-032a-46c7-85fe-f350aa61ddbe)
+![image](https://github.com/simces/VU-blockchain/assets/78842398/364db425-0491-4e26-b8d2-fa7d67bf3bb6)
+
 
 ---
 
@@ -50,7 +50,8 @@ Based on the image below we can see, that the custom hash algorithm holds up aga
 
 As I've mentioned before, the collision tests were also a success. After testing over a million pairs of inputs of different sizes, not a single collision was found. The inputs tested: `250 000` random strings of lengths `10, 100, 500, 1000`. And of course, it's no surprise that I didn't manage to find a collision in the other well known algorithms. 
 
-![image](https://github.com/simces/vu-blockchain/assets/78842398/e03200ec-af41-4f00-8fda-ef26d738a38a)
+![image](https://github.com/simces/VU-blockchain/assets/78842398/3e0a98a3-fb5d-4539-96f1-76ee2844d953)
+
 
 ---
 ### Avalanche effect testing
@@ -58,13 +59,13 @@ As I've mentioned before, the collision tests were also a success. After testing
 The initial tests of the avalanche effect were done using two `1500` character length inputs, where just one char is different, right in the middle of the file. Resulting hashes show that the custom hash generator has successfully passed the first test.
 
 <p align="center">
-  <img src="https://github.com/simces/vu-blockchain/assets/78842398/478fa65d-5205-418f-bef3-620b75cdfab4">
+  <img src="https://github.com/simces/VU-blockchain/assets/78842398/204ff0cc-6bbf-49cc-84f0-d9f78fcd3546">
 </p>
 
 Secondary tests were a bit more automated, since I used a big generated file of `100 000` input pairs of different lengths (`10, 100, 500, 1000`), in which just one char was different (for example, a pair is `sKjB1nf9XK` and `sKfB1nf9XK`). 
 
 <p align="center">
-  <img src="https://github.com/simces/vu-blockchain/assets/78842398/83bdf730-4021-4597-88d4-0f61797ba9a4">
+  <img src="https://github.com/simces/VU-blockchain/assets/78842398/c25d3096-fcb1-4521-b420-f3cbb61f32be">
 </p>
 
 I think it's safe to say that these tests were also a success, since, on average, the hashes of the pairs were very different, and on rare ocassions – completely different (all 64 hex chars are different). 
@@ -73,7 +74,7 @@ I think it's safe to say that these tests were also a success, since, on average
 
 ### Hash algorithm comparison
 
-In an attempt to dive a bit deeper into the comparisons, I've decided to compare all the algorithms I could get my hands on. Some of them are from the time when I took the course initially in **2021**, and some of them are from **2023**. Also, I would like to apologize in advance if I imported the algorithms incorrectly, which would cause them to slow down/malfunction, and not display accurate results. 
+In an attempt to dive a bit deeper into the comparisons, I've decided to compare all the algorithms I could get my hands on. Some of them are from the time when I took the course initially in **2021**, and some of them are from **2023**. Also, I would like to apologize to the authors in advance if I imported the algorithms incorrectly, which would cause them to slow down/malfunction, and not perform as they should. 
 
 All the algorithms (and their authors) from 2021:
 
@@ -91,11 +92,11 @@ The algorithms (and their authors) from 2023:
 9. [KlaidasK](https://github.com/KlaidasK/Blockchain/blob/main/v0.1.cpp)
 10. [JFour404](https://github.com/JFour404/blockChainTech/blob/main/src/hashF.cpp)
 
-The first quick test – checking whether the hash functions are deterministic. Apart from one interesting result `0000, asd`, all of the hashes passed the initial check. Specific inputs always resulted in the same specific outputs, and they all looked different enough to not cause a concern. 
+The first quick test – checking whether the hash functions are deterministic and different. Apart from one interesting result where `linccer's` function produced a hash with `000000000000` at the end, all of the hashes passed the initial check. Specific inputs always resulted in the same specific outputs, and they looked different enough to not cause a concern. 
 
 The second test – speed. In an attempt to make testing as fair as possible, the program runs through a specific number of lines in the `konstitucija.txt` file 10 times, and then I repeat these tests 3 times to get the most accurate results possible. 
 
-![image](https://github.com/simces/VU-blockchain/assets/78842398/23aa4590-1c18-4b6d-bb93-f79a5cd1beae)
+![image](https://github.com/simces/VU-blockchain/assets/78842398/e8685c0f-8b4c-4e02-8eda-0502727a583c)
 
 Based on the initial results it was clear that we had a lot of different approaches to the solution, since the speeds of the hash functions were so vastly different. When making the graph I decided to remove some of the main outliers, because otherwise, the graphs wouldn't be very informative. 
 
@@ -103,19 +104,26 @@ Based on the initial results it was clear that we had a lot of different approac
 
 And after averaging everything out, we can find the overall fastest algorithms. It's important to mention, that a fast algorithm isn't necessarily better, since it may be more vulnerable cryptographically, which is the most important thing when it comes to hash functions. 
 
-![image](https://github.com/simces/VU-blockchain/assets/78842398/7bf415af-af4b-4465-9c77-4f45e772a8a2)
 
-The next step – collision testing. To make it fair for all the different algorithms, they all used the same testing file, consisting of `100 000` different string pairs, of random lengths. Key points:
+<p align="center">
+  <img src="https://github.com/simces/VU-blockchain/assets/78842398/8391a8c5-90d2-4992-9717-eec3fd0bef0b">
+</p>
 
-* maciukasM hash function had `1` collision pair out of the `100 000` attempts (`9MtVTlyIHM` and `eMrXVWcvKR`);
-* linccer hash function had `157` collision pairs out of the `100 000` attempts;
-* couldn't check the `Paulius-U` and `JFour404` functions, due to extraordinarily long load times without any results (> 1 hour);
+The next step – collision testing. To make it fair for all the different algorithms, they all used the same testing files:
 
-There wasn't anything notable to add about the other hashing algorithms, since I couldn't manage to find a collision using them. 
-
-
-
+* `collision.txt`, consisting of `100 000` random string pairs, of various lengths (10, 100, 500, 1000 chars).
+* `avalanche.txt`, consisting of `100 000` string pairs of various lengths, where just one character is different.
+* `avalanche10000.txt`, consisting of `10 000` string pairs, for the slower algorithms.
 
 
+<p align="center">
+  <img src="https://github.com/simces/VU-blockchain/assets/78842398/358b74b0-0201-4810-a05a-f945c89a6928">
+</p>
 
+Some fields were left empty due to extraordinarily long load times without any results
 
+The final bit of testing that's left to do – avalanche tests. I used the previously mentioned `avalanche.txt` consisting of 100 000 input pairs of different lengths (10, 100, 500, 1000), in which just one char was different (for example, a pair is sKjB1nf9XK and sKfB1nf9XK).
+
+<p align="center">
+  <img src="https://github.com/simces/VU-blockchain/assets/78842398/c6d6b660-86e0-4800-a9d0-83adaca3090c">
+</p>
