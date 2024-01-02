@@ -4,7 +4,6 @@
 #include "declarations.h"
 #include "transaction.hpp"
 #include "user.hpp"
-#include "md5.h"
 
 class Block {
 
@@ -56,7 +55,7 @@ string Block::setMerkleHash(){
     for(int i=0; i<transactions.size(); i++){
         hashMerkle += transactions[i].transactionId;
     }
-    return md5(hashMerkle);
+    return hashFunction(hashMerkle);
 };
 
 void Block::mine(unsigned int difficulty) {
@@ -82,7 +81,7 @@ void Block::mine(unsigned int difficulty) {
 string Block::genHash() const{
     stringstream ss;
     ss << index << timestamp << curData << nonce << prevHash;
-    return md5(ss.str());
+    return hashFunction(ss.str());
 };
 
 
