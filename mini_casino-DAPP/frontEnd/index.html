@@ -9,24 +9,37 @@
 </head>
 
 <body>
-    <h1> mini casino dawg </h1>
 
-    <h1>Hello, <span id="userAddress">[user]</span></h1>
+    <h3>Hello, <span id="userAddress">[user]</span></h3>
+
+    <div> Blackjack chip balance: <span id="blackjackBalanceSpan">0</span></div>
+    <div> Roulette chip balance: <span id="rouletteBalanceSpan">0</span></div>
+    <div> Poker chip balance: <span id="pokerBalanceSpan">0</span></div>
+    
+   
+<div id = "buyMenu"> 
     <div>
+        <p> Current price: </p>
+        <p> 0.001 ETH = 100 tokens </p>
         <input id="ethAmount" type="number" placeholder="Enter ETH amount">
-        <button id="submitPurchase">Buy Chips</button>
-        <p>0.01 ETH = 100 tokens</p>
+        <button id="buyBlackjackChips">Buy Blackjack Chips</button>
     </div>
 
+    <div>
+        <p> Current price: </p>
+        <p> 0.001 ETH = 100 tokens </p>
+        <input id="ethAmount" type="number" placeholder="Enter ETH amount">
+        <button id="buyRouletteChips">Buy Roulette Chips</button>
+    </div>
 
+    <div>
+        <p> Current price: </p>
+        <p> 0.001 ETH = 100 tokens </p>
+        <input id="ethAmount" type="number" placeholder="Enter ETH amount">
+        <button id="buyPokerChips">Buy Poker Chips</button>
+    </div>
+</div>       
 
-
-    
-    <button id="connectWallet"> connect Wallet </button>
-
-    <div id="userBalance"> Chip Balance: <span id="balance">0</span> eur:D</div>
-    
-    <button id="buyChips"> Buy Chips (Send 1 ETH) </button>
 
     <script src="app.js"></script>
 

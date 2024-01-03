@@ -17,3 +17,11 @@ button {
 #userBalance {
     margin: 20px;
 }
+
+
+
+#buyMenu {
+    padding: 100px;
+    display: flex;
+    text-align: center;
+}
