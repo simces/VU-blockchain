@@ -4,13 +4,15 @@
 #include "declarations.h"
 #include "transaction.hpp"
 #include "user.hpp"
+#include "merkle.hpp"
+
 
 class Block {
 
     private:
-    int timestamp = 0;
     int index;
     int nonce;
+    string timestamp;
     string curHash;
     string curData;
     string genHash() const;
@@ -27,41 +29,53 @@ class Block {
     string getPrevHash();
     string setMerkleHash();
     string getHash();
+    string getTimestamp();
     int getDifficulty();
-    int get_timestamp();
     int getTransactionCount();
     int getTransactionVolume();
     int getVersion();
     int getNonce();
 };
 
-Block::Block(int IndexIn, vector<Transaction> transactions){
+
+Block::Block(int IndexIn, vector<Transaction> transactions) {
     index = IndexIn;
     this -> transactions = transactions;
     nonce = -1;
-    this -> timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
+    std::time_t now = std::time(nullptr);
+    char buf[80];
+    std::strftime(buf, sizeof(buf), "%b %d, %Y, %I:%M:%S %p", std::localtime(&now));
+    timestamp = buf;
 }
 
-string Block::getPrevHash(){
-    return this->prevHash;
+
+string Block::getPrevHash() {
+    return this -> prevHash;
 }
 
-string Block::getHash(){
+
+string Block::getHash() {
     return curHash;
 }
 
-string Block::setMerkleHash(){
-    string hashMerkle;
-    for(int i=0; i<transactions.size(); i++){
-        hashMerkle += transactions[i].transactionId;
+
+string Block::setMerkleHash() {
+    std::vector<std::string> transactionHashes;
+    for (const auto& transaction : transactions) {
+        transactionHashes.push_back(transaction.transactionId); // Assuming transactionId is already a hash
     }
-    return hashFunction(hashMerkle);
-};
+
+    MerkleTree merkleTree(transactionHashes);
+    return merkleTree.getMerkleRoot();
+}
+
 
 void Block::mine(unsigned int difficulty) {
     char* cstr;
-    cstr = new char[difficulty+1];
-    for(int i=0; i<difficulty; i++){
+    cstr = new char[difficulty + 1];
+
+    for (int i = 0; i < difficulty; i++) {
         cstr[i] = '0';
     }
 
@@ -78,6 +92,7 @@ void Block::mine(unsigned int difficulty) {
     cout << "Hash of block " << index << ": " << curHash << "\n";
 };
 
+
 string Block::genHash() const{
     stringstream ss;
     ss << index << timestamp << curData << nonce << prevHash;
@@ -85,27 +100,32 @@ string Block::genHash() const{
 };
 
 
-int Block::getDifficulty(){
-    return this->difficulty;
+int Block::getDifficulty() {
+    return this -> difficulty;
 };
 
-int Block::getVersion(){
-    return this->version;
+
+int Block::getVersion() {
+    return this -> version;
 };
 
-int Block::getNonce(){
-    return this->nonce;
+
+int Block::getNonce() {
+    return this -> nonce;
 };
 
-int Block::get_timestamp() {
-    return this->timestamp;
+
+string Block::getTimestamp() {
+    return timestamp;
 };
+
 
 int Block::getTransactionCount() {
     return transactions.size();
 }
 
-int Block::getTransactionVolume(){
+
+int Block::getTransactionVolume() {
     int output = 0;
     for(Transaction& t: transactions) {
         output += t.amount;

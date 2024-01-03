@@ -13,6 +13,9 @@
 #include <vector>
 #include <time.h>
 #include <chrono>
+#include <thread>
+#include <atomic>
+#include <algorithm>
 using namespace std;
 
 std::string hashFunction(std::string hashInput);

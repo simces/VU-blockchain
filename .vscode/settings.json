@@ -48,6 +48,7 @@
         "ratio": "cpp",
         "bitset": "cpp",
         "list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "thread": "cpp"
     }
 }

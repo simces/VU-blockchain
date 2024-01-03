@@ -4,38 +4,42 @@
 #include "declarations.h"
 
 class User {
-    public:
-    string publicKey;
-    User(string name, string publicKey, int balance);
-
-    string getKey();
-    void setBalance(int);
-    string getName();
-    int getBalance();
 
     private:
     string name;
     int balance;
 
+    public:
+    User(string name, string publicKey, int balance);
+    string publicKey;
+    string getKey();
+    string getName();
+    int getBalance();
+    void setBalance(int);
 };
 
-User::User(string name, string publicKey, int balance){
+
+User::User(string name, string publicKey, int balance) {
     this -> name = name;
     this -> publicKey = publicKey;
     this -> balance = balance;
 }
 
-string User::getKey(){
-    return this->publicKey;
+
+string User::getKey() {
+    return this -> publicKey;
 }
 
-string User::getName(){
-    return this->name;
+
+string User::getName() {
+    return this -> name;
 }
 
-int User::getBalance(){
+
+int User::getBalance() {
     return this -> balance;
 }
+
 
 void User::setBalance(int value) {
     this -> balance = value;

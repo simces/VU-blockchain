@@ -4,29 +4,32 @@
 #include "declarations.h"
 #include "Block.hpp"
 
-class Blockchain{
+class Blockchain {
+
     public:
     Blockchain(Block mainBlock);
-        Block getLastBlock() const;
+    Block getLastBlock() const;
     void addBlock(Block blockNew);
 
     private:
     unsigned int difficulty;
     vector<Block> blockChain;
-    
-
 };
+
 
 Blockchain::Blockchain(Block mainBlock) {
     blockChain.emplace_back(mainBlock);
-    difficulty = 3;
+    difficulty = 2;
 }
 
-Block Blockchain::getLastBlock() const{
+
+Block Blockchain::getLastBlock() const {
     return blockChain.back();
 }
 
+
 void Blockchain::addBlock(Block blockNew) {
+    blockNew.difficulty = difficulty;
     blockNew.prevHash = getLastBlock().getHash();
     blockNew.mine(difficulty);
     blockChain.push_back(blockNew);
