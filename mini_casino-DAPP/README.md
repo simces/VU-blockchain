@@ -32,6 +32,6 @@ After selling the tokens back to the casino, the user was sitting at `98.68 ETH`
 
 Once I managed to confirm that the actual contracts work as intended, it was just a matter of plugging them into an Ethereum test network, `Goerli`. 
 
-![image](https://github.com/simces/VU-blockchain/assets/78842398/df6c6f4b-8812-43a4-85b9-bdcc59093ce4)
+![image](https://github.com/simces/VU-blockchain/assets/78842398/3833194c-f9b3-43c6-95ad-1821d1a107c1)
 
-The good news – the `buying` and `selling` of the tokens work with `Metamask`, but I could not implement the actual games in time, to spend/earn those tokens. 
+The good news – the `buying` and `selling` of the tokens work with `Metamask`, but I could not implement the actual games & the item store in time, to spend/earn those tokens. 
