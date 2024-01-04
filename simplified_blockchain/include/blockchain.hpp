@@ -19,7 +19,7 @@ class Blockchain {
 
 Blockchain::Blockchain(Block mainBlock) {
     blockChain.emplace_back(mainBlock);
-    difficulty = 2;
+    difficulty = 5;
 }
 
 

@@ -4,53 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Casino</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles\styles.css">
     <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
 </head>
 
 <body>
     
-    <h1>Mini Casino DApp</h1>
     <div id="userAddress">Welcome: </div>
 
-    <h2>Casino Balances</h2>
-    <div id="casinoEthBalance">Casino ETH Balance: </div>
-    <div id="casinoBlackjackBalance">Casino Blackjack Token Balance: </div>
-    <div id="casinoRouletteBalance">Casino Roulette Token Balance: </div>
-    <div id="casinoPokerBalance">Casino Poker Token Balance: </div>
+    <div id="balancesContainer">
+        <div id="casinoBalances">
+            <h2>Casino Balances</h2>
+            <div id="casinoEthBalance">Casino ETH Balance: </div>
+            <div id="casinoBlackjackBalance">Casino Blackjack Token Balance: </div>
+            <div id="casinoRouletteBalance">Casino Roulette Token Balance: </div>
+            <div id="casinoPokerBalance">Casino Poker Token Balance: </div>
+        </div>
 
-    <h2>Your Balances</h2>
-    <div id="userEthBalance">Your ETH Balance: </div>
-    <div id="userBlackjackBalance">Your Blackjack Token Balance: </div>
-    <div id="userRouletteBalance">Your Roulette Token Balance: </div>
-    <div id="userPokerBalance">Your Poker Token Balance: </div>
-
-    <div>
-        <h2>Blackjack Tokens</h2>
-        <input id="buyBlackjackAmount" type="number" placeholder="Amount to Buy">
-        <button onclick="buyBlackjackTokens()">Buy Blackjack Tokens</button>
-
-        <input id="sellBlackjackAmount" type="number" placeholder="Amount to Sell">
-        <button onclick="sellBlackjackTokens()">Sell Blackjack Tokens</button>
+        <div id="userBalances">
+            <h2>Your Balances</h2>
+            <div id="userEthBalance">Your ETH Balance: </div>
+            <div id="userBlackjackBalance">Your Blackjack Token Balance: </div>
+            <div id="userRouletteBalance">Your Roulette Token Balance: </div>
+            <div id="userPokerBalance">Your Poker Token Balance: </div>
+        </div>
     </div>
 
-    <div>
-        <h2>Roulette Tokens</h2>
-        <input id="buyRouletteAmount" type="number" placeholder="Amount to Buy">
-        <button onclick="buyRouletteTokens()">Buy Roulette Tokens</button>
+    <div id = "tokenContainer">
+        <div id="blackjackTokens">
+            <h2>Blackjack Tokens</h2>
+            <input id="buyBlackjackAmount" type="number" placeholder="Amount to Buy">
+            <button onclick="buyBlackjackTokens()">Buy Blackjack Tokens</button>
 
-        <input id="sellRouletteAmount" type="number" placeholder="Amount to Sell">
-        <button onclick="sellRouletteTokens()">Sell Roulette Tokens</button>
+            <input id="sellBlackjackAmount" type="number" placeholder="Amount to Sell">
+            <button onclick="sellBlackjackTokens()">Sell Blackjack Tokens</button>
+            <button onclick="window.location.href='html/blackjack.html'" class="playButton">Play Blackjack</button>
+        </div>
+
+        <div id="rouletteTokens">
+            <h2>Roulette Tokens</h2>
+            <input id="buyRouletteAmount" type="number" placeholder="Amount to Buy">
+            <button onclick="buyRouletteTokens()">Buy Roulette Tokens</button>
+
+            <input id="sellRouletteAmount" type="number" placeholder="Amount to Sell">
+            <button onclick="sellRouletteTokens()">Sell Roulette Tokens</button>
+            <button onclick="window.location.href='html/roulette.html'" class="playButton">Play Roulette</button>
+        </div>
+
+        <div id="pokerTokens">
+            <h2>Poker Tokens</h2>
+            <input id="buyPokerAmount" type="number" placeholder="Amount to Buy">
+            <button onclick="buyPokerTokens()">Buy Poker Tokens</button>
+
+            <input id="sellPokerAmount" type="number" placeholder="Amount to Sell">
+            <button onclick="sellPokerTokens()">Sell Poker Tokens</button>
+            <button onclick="window.location.href='html/poker.html'" class="playButton">Play Poker</button>
+        </div>
+    </div>    
+
+    <div class="buttonContainer">
+        <button onclick="window.location.href='html/store.html'" class="storeButton">Store</button>
+        <button onclick="window.location.href='https://nebenoriu-losti.lt/losimas/probleminis-losimas/'" class="problemButton">Problems?</button>
     </div>
+    
 
-    <div>
-        <h2>Poker Tokens</h2>
-        <input id="buyPokerAmount" type="number" placeholder="Amount to Buy">
-        <button onclick="buyPokerTokens()">Buy Poker Tokens</button>
-
-        <input id="sellPokerAmount" type="number" placeholder="Amount to Sell">
-        <button onclick="sellPokerTokens()">Sell Poker Tokens</button>
-    </div>
 
     <script src="app.js"></script>
 
