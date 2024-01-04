@@ -8646,6 +8646,38 @@
     "version": "0.8.19+commit.7dd6d404.Emscripten.clang"
   },
   "networks": {
+    "5": {
+      "events": {
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xF35497C42e3D9Ccae3B5B84d4c5cC6e7eDEaf1Ce",
+      "transactionHash": "0x0352a00b4f66b2ce8836cf8f165d7b164cd60803884cd7fa02045db28715bf64"
+    },
     "5777": {
       "events": {
         "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
@@ -8680,7 +8712,7 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-01-03T23:31:01.369Z",
+  "updatedAt": "2024-01-04T00:04:28.402Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

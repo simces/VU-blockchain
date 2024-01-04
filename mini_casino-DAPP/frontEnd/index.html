@@ -9,37 +9,48 @@
 </head>
 
 <body>
-
-    <h3>Hello, <span id="userAddress">[user]</span></h3>
-
-    <div> Blackjack chip balance: <span id="blackjackBalanceSpan">0</span></div>
-    <div> Roulette chip balance: <span id="rouletteBalanceSpan">0</span></div>
-    <div> Poker chip balance: <span id="pokerBalanceSpan">0</span></div>
     
-   
-<div id = "buyMenu"> 
+    <h1>Mini Casino DApp</h1>
+    <div id="userAddress">Welcome: </div>
+
+    <h2>Casino Balances</h2>
+    <div id="casinoEthBalance">Casino ETH Balance: </div>
+    <div id="casinoBlackjackBalance">Casino Blackjack Token Balance: </div>
+    <div id="casinoRouletteBalance">Casino Roulette Token Balance: </div>
+    <div id="casinoPokerBalance">Casino Poker Token Balance: </div>
+
+    <h2>Your Balances</h2>
+    <div id="userEthBalance">Your ETH Balance: </div>
+    <div id="userBlackjackBalance">Your Blackjack Token Balance: </div>
+    <div id="userRouletteBalance">Your Roulette Token Balance: </div>
+    <div id="userPokerBalance">Your Poker Token Balance: </div>
+
     <div>
-        <p> Current price: </p>
-        <p> 0.001 ETH = 100 tokens </p>
-        <input id="ethAmount" type="number" placeholder="Enter ETH amount">
-        <button id="buyBlackjackChips">Buy Blackjack Chips</button>
+        <h2>Blackjack Tokens</h2>
+        <input id="buyBlackjackAmount" type="number" placeholder="Amount to Buy">
+        <button onclick="buyBlackjackTokens()">Buy Blackjack Tokens</button>
+
+        <input id="sellBlackjackAmount" type="number" placeholder="Amount to Sell">
+        <button onclick="sellBlackjackTokens()">Sell Blackjack Tokens</button>
     </div>
 
     <div>
-        <p> Current price: </p>
-        <p> 0.001 ETH = 100 tokens </p>
-        <input id="ethAmount" type="number" placeholder="Enter ETH amount">
-        <button id="buyRouletteChips">Buy Roulette Chips</button>
+        <h2>Roulette Tokens</h2>
+        <input id="buyRouletteAmount" type="number" placeholder="Amount to Buy">
+        <button onclick="buyRouletteTokens()">Buy Roulette Tokens</button>
+
+        <input id="sellRouletteAmount" type="number" placeholder="Amount to Sell">
+        <button onclick="sellRouletteTokens()">Sell Roulette Tokens</button>
     </div>
 
     <div>
-        <p> Current price: </p>
-        <p> 0.001 ETH = 100 tokens </p>
-        <input id="ethAmount" type="number" placeholder="Enter ETH amount">
-        <button id="buyPokerChips">Buy Poker Chips</button>
-    </div>
-</div>       
+        <h2>Poker Tokens</h2>
+        <input id="buyPokerAmount" type="number" placeholder="Amount to Buy">
+        <button onclick="buyPokerTokens()">Buy Poker Tokens</button>
 
+        <input id="sellPokerAmount" type="number" placeholder="Amount to Sell">
+        <button onclick="sellPokerTokens()">Sell Poker Tokens</button>
+    </div>
 
     <script src="app.js"></script>
 

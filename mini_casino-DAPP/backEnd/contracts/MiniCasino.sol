@@ -10,8 +10,8 @@ contract MiniCasino {
     RouletteToken public rouletteToken;
     PokerToken public pokerToken;
 
-    uint256 public constant BUY_PRICE = 0.1 ether;      // essentially it's 
-    uint256 public constant SELL_PRICE = 0.0975 ether;  // a house advantage. 
+    uint256 public constant BUY_PRICE = 0.001 ether;      // essentially it's 
+    uint256 public constant SELL_PRICE = 0.000975 ether;  // a house advantage. 
 
     constructor(address blackjackTokenAddress, address rouletteTokenAddress, address pokerTokenAddress) {
         blackjackToken = BlackjackToken(blackjackTokenAddress);
