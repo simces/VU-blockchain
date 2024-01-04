@@ -27,3 +27,11 @@ After checking the picture above we can clearly see that the account has lost th
 After selling the tokens back to the casino, the user was sitting at `98.68 ETH`, while the casino had `1.25 ETH`, which was a way to implement a house advantage, a typical thing in typical casinos. 
 
 ---
+
+### Final-ish version
+
+Once I managed to confirm that the actual contracts work as intended, it was just a matter of plugging them into an Ethereum test network, `Goerli`. 
+
+![image](https://github.com/simces/VU-blockchain/assets/78842398/df6c6f4b-8812-43a4-85b9-bdcc59093ce4)
+
+The good news – the `buying` and `selling` of the tokens work with `Metamask`, but I could not implement the actual games in time, to spend/earn those tokens. 
